@@ -31,12 +31,26 @@ public class Course
         this.title = title;
         
         module1 = new Module("Programming Concepts", "CO452");
-        //todo add the others
+        module2 = new Module("Application Programming", "CO453");
+        module3 = new Module("Web Development", "CO456");
+        module4 = new Module("Business Modelling", "CO457");
     }
 
     public void addMark(int mark, int moduleNo)
     {
         if(moduleNo == 1)
+        {
+            module1.awardMark(mark);
+        }
+        else if(moduleNo == 2)
+        {
+            module1.awardMark(mark);
+        }
+        else if(moduleNo == 3)
+        {
+            module1.awardMark(mark);
+        } 
+        else if(moduleNo == 4)
         {
             module1.awardMark(mark);
         }
@@ -49,6 +63,8 @@ public class Course
     {
         // put your code here
         System.out.println("Course " + codeNo + " - " + title);
+        module1.print();
+        module2.print();
     }
     
     public Grades convertToGrade(int mark)
