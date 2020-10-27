@@ -16,11 +16,11 @@ public class Course
     private Module module2;
     private Module module3;
     private Module module4;
-    
+
     private int finalMark;
-        
+
     private Grades finalGrade;
-        
+
     /**
      * Constructor for objects of class Course
      */
@@ -29,7 +29,7 @@ public class Course
         // initialise instance variables
         this.codeNo = codeNo;
         this.title = title;
-        
+
         module1 = new Module("Programming Concepts", "CO452");
         module2 = new Module("Application Programming", "CO453");
         module3 = new Module("Web Development", "CO456");
@@ -55,7 +55,7 @@ public class Course
             module1.awardMark(mark);
         }
     }
-    
+
     /**
      * Prints out the details of a course
      */
@@ -66,14 +66,14 @@ public class Course
         module1.print();
         module2.print();
     }
-    
+
     public Grades convertToGrade(int mark)
     {
         if((mark >= 0) && (mark < 40))
         {
             return Grades.F;
         }
-        
+
         return Grades.X;
     }
 }
