@@ -53,6 +53,8 @@ public class StockDemo
         manager.printAllProducts();
         demoDeliverProducts();
         manager.printAllProducts();
+        demoSellProducts();
+        manager.printAllProducts();
     }
     
     /**
@@ -72,37 +74,19 @@ public class StockDemo
     }
     
     /**
-     * Sell one of the given item.
-     * Show the before and after status of the product.
-     * @param id The ID of the product being sold.
+     * Provide a very simple demonstration of how a StockManager
+     * might be used. Details of one product are shown, the
+     * product is restocked, and then the details are shown again.
      */
-    public void demoSellProduct(int id)
+    private void demoSellProducts()
     {
-        Product product = getProduct(id);
+        int quantity = 0;
         
-        if(product != null) 
+        for(int id = 101; id <= 110; id++)
         {
-            manager.printProduct(id);
-            product.sellOne();
-            manager.printProduct(id);
+            quantity = randomGenerator.nextInt(4);
+            manager.sellProduct(id, quantity);
         }
     }
     
-    /**
-     * Get the product with the given id from the manager.
-     * An error message is printed if there is no match.
-     * @param id The ID of the product.
-     * @return The Product, or null if no matching one is found.
-     */
-    public Product getProduct(int id)
-    {
-        Product product = manager.findProduct(id);
-        
-        if(product == null) 
-        {
-            System.out.println("Product with ID: " + id +
-                               " is not recognised.");
-        }
-        return product;
-    }
 }
