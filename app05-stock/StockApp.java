@@ -9,8 +9,16 @@
  */
 public class StockApp
 {
+    public final int FIRST_ID = 200;
+    
     // Use to get user input
     private InputReader input;
+    
+    private StockManager manager;
+    
+    private StockDemo demo;
+    
+    private int nextID = FIRST_ID;
     
     /**
      * Constructor for objects of class StockApp
@@ -18,21 +26,14 @@ public class StockApp
     public StockApp()
     {
         input = new InputReader();
+        manager = new StockManager();
+        demo = new StockDemo(manager);
     }
 
     /**
      * 
      */
     public void run()
-    {
-        printHeading();
-        getMenuChoice();
-    }
-    
-    /**
-     * 
-     */
-    public void getMenuChoice()
     {
         boolean finished = false;
         
@@ -42,11 +43,61 @@ public class StockApp
             printMenuChoices();
            
             String choice = input.getInput();
-            finished = true;
+            choice = choice.toLowerCase();
+            
+            executeMenuChoice(choice);
+            
+            if(choice.equals("quit"))
+                finished = true;
         }
     }
     
-   
+    /**
+     * 
+     */
+    public void executeMenuChoice(String choice)
+    {
+        if(choice.equals("add"))
+        {
+            addProduct();
+        }
+        else if(choice.equals("remove"))
+        {
+            removeProduct();
+        }         
+        else if(choice.equals("printall"))
+        {
+            printAllProducts();
+        }        
+    }
+    
+    public void addProduct()
+    {
+        System.out.println("Add a new Product");
+        System.out.println();
+        
+        System.out.println("Please enter the name of the product ");
+        String name = input.getInput();
+        
+        Product product = new Product(nextID, name);
+        manager.addProduct(product);
+        
+        System.out.println("\nAdded " + product + " to the stock\n");
+        nextID++;
+    }
+    
+    public void removeProduct()
+    {
+        System.out.println("Remove an old Product");
+        System.out.println();
+        
+        System.out.println("Please enter the id of the product ");
+        String number = input.getInput();
+        
+        int id = Integer.parseInt(number);
+        manager.removeProduct(id);
+    }
+    
     /**
      * Print out a menu of operation choices
      */
@@ -60,6 +111,11 @@ public class StockApp
         System.out.println();        
     }
     
+    public void printAllProducts()
+    {
+        manager.printAllProducts();
+    }
+    
     /**
      * Print the title of the program and the authors name
      */
@@ -67,7 +123,7 @@ public class StockApp
     {
         System.out.println("******************************");
         System.out.println(" Stock Management Application ");
-        System.out.println("    App05: by Student Name");
+        System.out.println("    App05: by Derek Peacock");
         System.out.println("******************************");
     }
 }
